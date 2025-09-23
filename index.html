@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#001f3f">
     <title>DISCOVERY Study Recruitment</title>
     <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" rel="preload" as="script">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -18,22 +19,43 @@
             font-size: 16px;
             max-width: 100%;
             overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        header {
+            position: relative;
+            background-color: #001f3f;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        body.dark header {
+            background-color: #003366;
         }
         h1, h2, h3 {
             color: #001f3f;
             text-align: center;
             margin: 20px 0 10px;
+            transition: color 0.3s;
+        }
+        body.dark h1, body.dark h2, body.dark h3 {
+            color: #bbdefb;
         }
         h1 {
             font-size: 24px;
-            padding: 15px 0;
-            background-color: #001f3f;
+            padding: 15px;
             color: #fff;
             margin: 0;
         }
         section {
             padding: 15px;
             border-bottom: 1px solid #ddd;
+            transition: border-color 0.3s;
+        }
+        body.dark section {
+            border-bottom: 1px solid #444;
         }
         ul {
             list-style-type: none;
@@ -72,13 +94,18 @@
         button:hover {
             background-color: #218838;
         }
-        #emailTemplate {
+        #emailTemplate, #eligibilityStatus {
             margin-top: 20px;
             border: 1px solid #ddd;
             padding: 15px;
             background-color: #f8f9fa;
             border-radius: 5px;
             animation: fadeIn 0.5s ease-in-out;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        body.dark #emailTemplate, body.dark #eligibilityStatus {
+            background-color: #1e1e1e;
+            border-color: #444;
         }
         textarea {
             width: 100%;
@@ -87,18 +114,88 @@
             border-radius: 5px;
             padding: 10px;
             font-size: 16px;
-            resize: none;
+            resize: vertical;
             background-color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        body.dark textarea {
+            background-color: #333;
+            border-color: #555;
+            color: #e0e0e0;
         }
         a {
             color: #007bff;
             text-decoration: none;
+            transition: color 0.3s;
+        }
+        body.dark a {
+            color: #64b5f6;
         }
         .copy-btn {
             background-color: #007bff;
         }
         .copy-btn:hover {
             background-color: #0056b3;
+        }
+        .status-green {
+            color: #28a745;
+        }
+        .status-red {
+            color: #dc3545;
+        }
+        #offlineIndicator {
+            background-color: #ffc107;
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            display: none;
+        }
+        #bottomNav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+        body.dark #bottomNav {
+            background-color: #1e1e1e;
+        }
+        #bottomNav button {
+            width: auto;
+            padding: 8px 16px;
+            margin: 0 5px;
+        }
+        details {
+            margin-bottom: 10px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 500;
+        }
+        #darkModeToggle {
+            padding: 2px 4px;
+            font-size: 10px;
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark #darkModeToggle {
+            background-color: #333;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+        #installButton {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -109,13 +206,16 @@
             body {
                 max-width: 800px;
                 margin: 0 auto;
-                padding: 20px;
+                padding: 20px 20px 60px 20px; /* Adjust for bottom nav */
             }
             h1 {
                 font-size: 28px;
             }
             section {
                 padding: 20px;
+            }
+            #bottomNav {
+                display: none; /* Hide on larger screens if not needed */
             }
         }
         @media (min-width: 1024px) {
@@ -126,90 +226,207 @@
     </style>
 </head>
 <body>
-    <h1>DISCOVERY Study Recruitment</h1>
+    <header>
+        <h1>DISCOVERY Study Recruitment</h1>
+    </header>
+    <div style="text-align: right; padding: 5px;">
+        <button id="darkModeToggle">Dark Mode</button>
+    </div>
     
-    <section id="eligibility">
-        <h2>Eligibility Criteria</h2>
-        
-        <h3>Inclusion – Check All That Apply</h3>
-        <ul>
-            <li><input type="checkbox" id="age"><label for="age">Age ≥18</label></li>
-            <li><input type="checkbox" id="admission"><label for="admission">Hospital admission with acute ischemic stroke (AIS), intracerebral hemorrhage (ICH), or aneurysmal subarachnoid hemorrhage (aSAH)</label></li>
-            <li><input type="checkbox" id="radiographic"><label for="radiographic">Radiographic confirmation of stroke type</label></li>
-            <li><input type="checkbox" id="baseline"><label for="baseline">Able to complete baseline visit within 6 weeks of onset</label></li>
-            <li><input type="checkbox" id="consent"><label for="consent">Able to provide informed consent (self or proxy)</label></li>
-            <li><input type="checkbox" id="language"><label for="language">Fluent in English or Spanish prior to stroke</label></li>
-        </ul>
-        
-        <h3>Exclusion – Check Any That Apply</h3>
-        <ul>
-            <li><input type="checkbox" id="dementia"><label for="dementia">Pre-stroke dementia or failed dementia pre-screen</label></li>
-            <li><input type="checkbox" id="study"><label for="study">Enrollment in a conflicting non-approved study</label></li>
-            <li><input type="checkbox" id="protocol"><label for="protocol">Unable to complete protocol due to advanced directives or severe comorbidities</label></li>
-        </ul>
-    </section>
+    <div id="offlineIndicator">You are offline. Some features may be limited.</div>
     
-    <section id="bedside">
-        <h2>Bedside Message</h2>
-        <p id="bedsideMessage">“Please consider participating in the DISCOVERY study, which looks at how stroke affects thinking and memory over time. Taking part will not change or delay your medical care. If you joined, you will see a neurologist at Harborview Medical Center stroke clinic. That visit will include brief thinking and memory tests along with a small blood draw—about 25 milliliters (around five teaspoons). Follow-up would occur again around 3–6 months and in 18 months, with a short phone call each year. Would you be open to hearing more or talking with our research coordinator?”</p>
-        <button id="copyBedside" class="copy-btn">Copy Message</button>
-    </section>
+    <details open>
+        <summary>Eligibility Criteria</summary>
+        <section id="eligibility">
+            <h3>Inclusion – Check All That Apply</h3>
+            <ul id="inclusionList">
+                <li><input type="checkbox" id="age"><label for="age" title="Patient must be at least 18 years old.">Age ≥18</label></li>
+                <li><input type="checkbox" id="admission"><label for="admission" title="Admission for specified stroke types.">Hospital admission with acute ischemic stroke (AIS), intracerebral hemorrhage (ICH), or aneurysmal subarachnoid hemorrhage (aSAH)</label></li>
+                <li><input type="checkbox" id="radiographic"><label for="radiographic" title="Confirmed by imaging.">Radiographic confirmation of stroke type</label></li>
+                <li><input type="checkbox" id="baseline"><label for="baseline" title="Must be able to attend within 6 weeks.">Able to complete baseline visit within 6 weeks of onset</label></li>
+                <li><input type="checkbox" id="consent"><label for="consent" title="Self or proxy consent.">Able to provide informed consent (self or proxy)</label></li>
+                <li><input type="checkbox" id="language"><label for="language" title="Pre-stroke fluency.">Fluent in English or Spanish prior to stroke</label></li>
+            </ul>
+            
+            <h3>Exclusion – Check Any That Apply</h3>
+            <ul id="exclusionList">
+                <li><input type="checkbox" id="dementia"><label for="dementia" title="Pre-existing dementia.">Pre-stroke dementia or failed dementia pre-screen</label></li>
+                <li><input type="checkbox" id="study"><label for="study" title="Conflicting studies.">Enrollment in a conflicting non-approved study</label></li>
+                <li><input type="checkbox" id="protocol"><label for="protocol" title="Unable due to health or directives.">Unable to complete protocol due to advanced directives or severe comorbidities</label></li>
+            </ul>
+            
+            <button id="checkEligibility">Check Eligibility</button>
+            <button id="resetEligibility">Reset</button>
+            <div id="eligibilityStatus" style="display:none;"></div>
+            <div id="proxyNote" style="display:none; color: #007bff; margin-top: 10px;">Note: Proxy consent is allowed if the patient is unable.</div>
+        </section>
+    </details>
     
-    <section id="refer">
-        <h2>Refer a Patient</h2>
-        <p>For eligible patients who express interest, generate an email template below. Copy and paste it into your secure UW email app, then add the patient's details (name and MRN) before sending.</p>
-        <button id="generateButton">Generate Email Template</button>
-        
-        <div id="emailTemplate" style="display:none;">
-            <h3>Email Template</h3>
-            <p><strong>To:</strong> rkalani@uw.edu</p>
-            <p><strong>Subject:</strong> Potential DISCOVERY Participant</p>
-            <p><strong>Body:</strong></p>
-            <textarea id="emailBody" readonly>* Patient's name: [ENTER NAME HERE]
-* Medical record number: [ENTER MRN HERE]</textarea>
-            <a id="sendEmail" href="mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=*%20Patient's%20name%3A%20%5BENTER%20NAME%20HERE%5D%0A*%20Medical%20record%20number%3A%20%5BENTER%20MRN%20HERE%5D" style="display: block; margin: 10px 0;">Open in Email App (Edit Details)</a>
-            <button id="copyButton" class="copy-btn">Copy Body</button>
-        </div>
-    </section>
+    <details open>
+        <summary>Bedside Message</summary>
+        <section id="bedside">
+            <p id="bedsideMessage">“Please consider participating in the DISCOVERY study, which looks at how stroke affects thinking and memory over time. Taking part will not change or delay your medical care. If you joined, you will see a neurologist at Harborview Medical Center stroke clinic. That visit will include brief thinking and memory tests along with a small blood draw—about 25 milliliters (around five teaspoons). Follow-up would occur again around 3–6 months and in 18 months, with a short phone call each year. Would you be open to hearing more or talking with our research coordinator?”</p>
+            <button id="copyBedside" class="copy-btn">Copy Message</button>
+        </section>
+    </details>
+    
+    <details open>
+        <summary>Refer a Patient</summary>
+        <section id="refer">
+            <p>For eligible patients who express interest, generate an email template below. Copy and paste it into your secure UW email app, then add the patient's details (name/MRN) before sending.</p>
+            <button id="generateButton">Generate Email Template</button>
+            
+            <div id="emailTemplate" style="display:none;">
+                <h3>Email Template</h3>
+                <p><strong>To:</strong> rkalani@uw.edu</p>
+                <p><strong>Subject:</strong> Potential DISCOVERY Participant</p>
+                <p><strong>Body:</strong></p>
+                <textarea id="emailBody" readonly>* Patient's name: 
+* Medical record number: </textarea>
+                <a id="sendEmail" href="mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=*%20Patient's%20name%3A%20%0A*%20Medical%20record%20number%3A%20" style="display: block; margin: 10px 0;">Open in Email App (Edit Details)</a>
+                <button id="copyButton" class="copy-btn">Copy Body</button>
+            </div>
+        </section>
+    </details>
+    
+    <details open>
+        <summary>Contact</summary>
+        <section id="contact">
+            <p>Rizwan Kalani</p>
+            <p>Phone: 206-643-1750</p>
+            <a href="sms:206-643-1750">Text Rizwan</a>
+        </section>
+    </details>
+    
+    <button id="installButton">Install App</button>
+    
+    <div id="bottomNav">
+        <button data-section="eligibility">Eligibility</button>
+        <button data-section="bedside">Message</button>
+        <button data-section="refer">Refer</button>
+        <button data-section="contact">Contact</button>
+    </div>
     
     <script>
-        // Persist checkbox states using localStorage
+        // Dark mode
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            darkModeToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+        });
+
+        // Persist checkbox and notes
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(checkbox => {
             const saved = localStorage.getItem(checkbox.id);
             if (saved === 'true') checkbox.checked = true;
             checkbox.addEventListener('change', () => {
                 localStorage.setItem(checkbox.id, checkbox.checked);
+                if (checkbox.id === 'consent' && checkbox.checked) {
+                    document.getElementById('proxyNote').style.display = 'block';
+                } else if (checkbox.id === 'consent') {
+                    document.getElementById('proxyNote').style.display = 'none';
+                }
             });
         });
 
-        // Copy bedside message
+        // Eligibility check
+        document.getElementById('checkEligibility').addEventListener('click', () => {
+            const inclusions = document.querySelectorAll('#inclusionList input[type="checkbox"]');
+            const exclusions = document.querySelectorAll('#exclusionList input[type="checkbox"]');
+            const allIncluded = Array.from(inclusions).every(cb => cb.checked);
+            const noExcluded = Array.from(exclusions).every(cb => !cb.checked);
+            const status = document.getElementById('eligibilityStatus');
+            status.style.display = 'block';
+            if (allIncluded && noExcluded) {
+                status.innerHTML = '<p class="status-green">Eligible: All inclusions met, no exclusions.</p>';
+            } else {
+                status.innerHTML = '<p class="status-red">Not Eligible: Review inclusions/exclusions.</p>';
+            }
+            status.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Reset eligibility
+        document.getElementById('resetEligibility').addEventListener('click', () => {
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+                localStorage.setItem(cb.id, false);
+            });
+            document.getElementById('eligibilityStatus').style.display = 'none';
+            document.getElementById('proxyNote').style.display = 'none';
+        });
+
+        // Copy bedside
         document.getElementById('copyBedside').addEventListener('click', () => {
             navigator.clipboard.writeText(document.getElementById('bedsideMessage').textContent).then(() => {
                 alert('Message copied!');
             }).catch(err => alert('Failed to copy: ' + err));
         });
 
-        // Generate email template
+        // Generate email
         document.getElementById('generateButton').addEventListener('click', () => {
             const template = document.getElementById('emailTemplate');
             template.style.display = 'block';
+            let body = `* Patient's name: \n* Medical record number: `;
+            document.getElementById('emailBody').value = body;
+            const encodedBody = encodeURIComponent(body);
+            document.getElementById('sendEmail').href = `mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=${encodedBody}`;
             template.scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Copy email body
+        // Copy email
         document.getElementById('copyButton').addEventListener('click', () => {
             navigator.clipboard.writeText(document.getElementById('emailBody').value).then(() => {
                 alert('Template copied! Paste and edit in your email app.');
             }).catch(err => alert('Failed to copy: ' + err));
         });
 
-        // Service Worker for PWA/offline
+        // Bottom nav
+        document.querySelectorAll('#bottomNav button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const sectionId = btn.getAttribute('data-section');
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Offline indicator
+        function updateOfflineStatus() {
+            document.getElementById('offlineIndicator').style.display = navigator.onLine ? 'none' : 'block';
+        }
+        window.addEventListener('online', updateOfflineStatus);
+        window.addEventListener('offline', updateOfflineStatus);
+        updateOfflineStatus();
+
+        // PWA install
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installButton').style.display = 'block';
+        });
+        document.getElementById('installButton').addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+
+        // Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js').then(reg => {
                     console.log('Service Worker registered');
-                }).catch(err => console.log('Service Worker registration failed: ' + err));
+                }).catch(err => console.log('Registration failed: ' + err));
             });
         }
     </script>
