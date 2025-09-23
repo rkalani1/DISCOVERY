@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DISCOVERY Study - Faculty recruitment portal for stroke research participants">
+    <title>DISCOVERY Study - Faculty Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- MIT License - Copyright (c) 2025 DISCOVERY Study Team -->
+    
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <div class="container">
+            <h1>DISCOVERY Study</h1>
+            <nav>
+                <a href="#eligibility">Eligibility</a>
+                <a href="#script">Script</a>
+                <a href="#submit">Submit</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Study Title -->
+        <section class="hero">
+            <h2>Determinants of Incident Stroke Cognitive Outcomes and Vascular Effects on RecoverY</h2>
+            <p class="subtitle">NIH-funded research on post-stroke cognitive impairment</p>
+        </section>
+
+        <!-- Eligibility Section -->
+        <section id="eligibility" class="card">
+            <h2>Eligibility Criteria</h2>
+            
+            <div class="criteria-group">
+                <h3>SCREEN (Inclusion) - all must be YES:</h3>
+                <ul class="checklist">
+                    <li>Age ≥18</li>
+                    <li>Hospital admission with acute ischemic stroke (AIS), intracerebral hemorrhage (ICH), or aneurysmal subarachnoid hemorrhage (aSAH)</li>
+                    <li>Radiographic confirmation of stroke type</li>
+                    <li>Able to complete baseline visit within 6 weeks of onset</li>
+                    <li>Able to provide informed consent (self or proxy)</li>
+                    <li>Fluent in English or Spanish prior to stroke</li>
+                </ul>
+            </div>
+
+            <div class="criteria-group">
+                <h3>EXCLUDE if any are TRUE:</h3>
+                <ul class="checklist exclude">
+                    <li>Pre-stroke dementia or failed dementia pre-screen</li>
+                    <li>Enrollment in a conflicting non-approved study</li>
+                    <li>Unable to complete protocol due to advanced directives or severe comorbidities</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Bedside Script Section -->
+        <section id="script" class="card">
+            <h2>Bedside Message for Eligible Patients</h2>
+            <div class="script-box">
+                <p>"Please consider participating in the DISCOVERY study, which looks at how stroke affects thinking and memory over time. Taking part will not change or delay your medical care. If you join, you will see a stroke neurologist at Harborview Medical Center's Stroke clinic within the next six weeks, and that visit will include brief thinking and memory tests along with a small blood draw—about 25 milliliters (around five teaspoons). Follow-up would occur again around 3–6 months and in 18 months, with a short phone call each year. Would you be open to hearing more or talking with our research coordinator?"</p>
+            </div>
+        </section>
+
+        <!-- Submit Form Section -->
+        <section id="submit" class="card">
+            <h2>Submit Potential Participant</h2>
+            
+            <!-- Privacy Notice -->
+            <div class="privacy-notice" role="alert">
+                <strong>⚠️ Privacy Notice:</strong> This form transmits patient information (name, MRN, optional email) to the DISCOVERY study team over an encrypted connection. Use only if you are authorized. Do not store or reuse PHI outside approved systems. Email sending must comply with institutional policies and HIPAA. If required by policy, do not enter patient emails and use secure internal messaging instead.
+            </div>
+
+            <form id="participant-form" novalidate>
+                <div class="form-group">
+                    <label for="patientName">
+                        Patient's Full Name <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="patientName" 
+                        name="patientName" 
+                        required 
+                        aria-required="true"
+                        aria-describedby="nameHint"
+                        autocomplete="off"
+                    >
+                    <small id="nameHint" class="hint">Enter patient's full legal name</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="mrn">
+                        Medical Record Number (MRN) <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="mrn" 
+                        name="mrn" 
+                        required 
+                        aria-required="true"
+                        aria-describedby="mrnHint"
+                        autocomplete="off"
+                        pattern="[A-Za-z0-9\-]+"
+                    >
+                    <small id="mrnHint" class="hint">Enter MRN without spaces</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="patientEmail">
+                        Patient or Proxy Email <span class="optional">(optional)</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="patientEmail" 
+                        name="patientEmail" 
+                        aria-describedby="emailHint"
+                        autocomplete="off"
+                    >
+                    <small id="emailHint" class="hint">If provided, patient info sheet will be sent to this address</small>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-primary">
+                    <span class="btn-text">Submit Referral</span>
+                    <span class="spinner" aria-hidden="true"></span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="sticky-footer">
+        <div class="container">
+            <small>DISCOVERY Study Portal v1.0 • Updated: January 2025</small>
+        </div>
+    </footer>
+
+    <!-- Toast Container for Notifications -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
