@@ -6,7 +6,6 @@
     <meta name="theme-color" content="#001f3f">
     <title>DISCOVERY Study Recruitment</title>
     <link rel="manifest" href="/manifest.json">
-    <link href="https://fonts.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" rel="preload" as="script">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -26,10 +25,13 @@
             color: #e0e0e0;
         }
         header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             background-color: #001f3f;
             transition: background-color 0.3s;
-            text-align: center;
+            padding: 10px;
         }
         body.dark header {
             background-color: #003366;
@@ -45,9 +47,10 @@
         }
         h1 {
             font-size: 24px;
-            padding: 15px;
             color: #fff;
             margin: 0;
+            flex-grow: 1;
+            text-align: center;
         }
         section {
             padding: 15px;
@@ -178,6 +181,10 @@
             font-weight: 500;
         }
         #darkModeToggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             padding: 2px 4px;
             font-size: 10px;
             background-color: #fff;
@@ -196,6 +203,34 @@
             display: none;
             width: 100%;
             margin-top: 20px;
+        }
+        #linksSection {
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            transition: border-color 0.3s;
+        }
+        body.dark #linksSection {
+            border-top: 1px solid #444;
+        }
+        #linksSection a {
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        #linksSection a:hover {
+            background-color: #0056b3;
+        }
+        body.dark #linksSection a {
+            background-color: #0056b3;
+        }
+        body.dark #linksSection a:hover {
+            background-color: #003d80;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -228,10 +263,8 @@
 <body>
     <header>
         <h1>DISCOVERY Study Recruitment</h1>
-    </header>
-    <div style="text-align: right; padding: 5px;">
         <button id="darkModeToggle">Dark Mode</button>
-    </div>
+    </header>
     
     <div id="offlineIndicator">You are offline. Some features may be limited.</div>
     
@@ -299,6 +332,11 @@
     </details>
     
     <button id="installButton">Install App</button>
+    
+    <div id="linksSection">
+        <a href="https://www.clinicaltrials.gov/study/NCT04916210" target="_blank">DISCOVERY - ClinicalTrials.gov</a>
+        <a href="https://www.ahajournals.org/doi/10.1161/STROKEAHA.120.031611" target="_blank">DISCOVERY study - methods paper</a>
+    </div>
     
     <div id="bottomNav">
         <button data-section="eligibility">Eligibility</button>
