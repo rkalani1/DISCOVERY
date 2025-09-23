@@ -25,13 +25,10 @@
             color: #e0e0e0;
         }
         header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
             background-color: #001f3f;
             transition: background-color 0.3s;
-            padding: 10px;
+            text-align: center;
         }
         body.dark header {
             background-color: #003366;
@@ -47,11 +44,9 @@
         }
         h1 {
             font-size: 24px;
+            padding: 15px;
             color: #fff;
             margin: 0;
-            flex-grow: 1;
-            text-align: center;
-            padding-right: 70px;
         }
         section {
             padding: 15px;
@@ -182,10 +177,6 @@
             font-weight: 500;
         }
         #darkModeToggle {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
             padding: 2px 4px;
             font-size: 10px;
             background-color: #fff;
@@ -194,6 +185,9 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
+            display: block;
+            margin: 10px auto;
+            width: auto;
         }
         body.dark #darkModeToggle {
             background-color: #333;
@@ -264,15 +258,15 @@
 <body>
     <header>
         <h1>DISCOVERY Study Recruitment</h1>
-        <button id="darkModeToggle">Dark Mode</button>
     </header>
+    <button id="darkModeToggle">Dark Mode</button>
     
     <div id="offlineIndicator">You are offline. Some features may be limited.</div>
     
     <details open>
         <summary>Eligibility Criteria</summary>
         <section id="eligibility">
-            <h3>Inclusion</h3>
+            <h3>Inclusion – Check All That Apply</h3>
             <ul id="inclusionList">
                 <li><input type="checkbox" id="age"><label for="age" title="Patient must be at least 18 years old.">Age ≥18</label></li>
                 <li><input type="checkbox" id="admission"><label for="admission" title="Admission for specified stroke types.">Hospital admission with acute ischemic stroke (AIS), intracerebral hemorrhage (ICH), or aneurysmal subarachnoid hemorrhage (aSAH)</label></li>
@@ -282,7 +276,7 @@
                 <li><input type="checkbox" id="language"><label for="language" title="Pre-stroke fluency.">Fluent in English or Spanish prior to stroke</label></li>
             </ul>
             
-            <h3>Exclusion</h3>
+            <h3>Exclusion – Check Any That Apply</h3>
             <ul id="exclusionList">
                 <li><input type="checkbox" id="dementia"><label for="dementia" title="Pre-existing dementia.">Pre-stroke dementia or failed dementia pre-screen</label></li>
                 <li><input type="checkbox" id="study"><label for="study" title="Conflicting studies.">Enrollment in a conflicting non-approved study</label></li>
@@ -320,6 +314,7 @@
                 <a id="sendEmail" href="mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=*%20Patient's%20name%3A%20%0A*%20Medical%20record%20number%3A%20" style="display: block; margin: 10px 0;">Open in Email App (Edit Details)</a>
                 <button id="copyButton" class="copy-btn">Copy Body</button>
             </div>
+            <p class="note" style="font-size: 14px; color: #666; margin-top: 15px;">Note: To ensure security, use your UW email client and select the 'Encrypt' option before sending PHI.</p>
         </section>
     </details>
     
