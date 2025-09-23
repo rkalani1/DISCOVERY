@@ -25,10 +25,13 @@
             color: #e0e0e0;
         }
         header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             background-color: #001f3f;
             transition: background-color 0.3s;
-            text-align: center;
+            padding: 10px;
         }
         body.dark header {
             background-color: #003366;
@@ -44,9 +47,11 @@
         }
         h1 {
             font-size: 24px;
-            padding: 15px;
             color: #fff;
             margin: 0;
+            flex-grow: 1;
+            text-align: center;
+            padding-right: 70px;
         }
         section {
             padding: 15px;
@@ -177,17 +182,18 @@
             font-weight: 500;
         }
         #darkModeToggle {
-            display: block;
-            margin: 5px auto 15px;
-            padding: 5px 10px;
-            font-size: 14px;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 2px 4px;
+            font-size: 10px;
             background-color: #fff;
             color: #333;
             border: 1px solid #ddd;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            width: auto;
         }
         body.dark #darkModeToggle {
             background-color: #333;
@@ -258,15 +264,15 @@
 <body>
     <header>
         <h1>DISCOVERY Study Recruitment</h1>
+        <button id="darkModeToggle">Dark Mode</button>
     </header>
-    <button id="darkModeToggle">Dark Mode</button>
     
     <div id="offlineIndicator">You are offline. Some features may be limited.</div>
     
     <details open>
         <summary>Eligibility Criteria</summary>
         <section id="eligibility">
-            <h3>Inclusion – Check All That Apply</h3>
+            <h3>Inclusion</h3>
             <ul id="inclusionList">
                 <li><input type="checkbox" id="age"><label for="age" title="Patient must be at least 18 years old.">Age ≥18</label></li>
                 <li><input type="checkbox" id="admission"><label for="admission" title="Admission for specified stroke types.">Hospital admission with acute ischemic stroke (AIS), intracerebral hemorrhage (ICH), or aneurysmal subarachnoid hemorrhage (aSAH)</label></li>
@@ -276,7 +282,7 @@
                 <li><input type="checkbox" id="language"><label for="language" title="Pre-stroke fluency.">Fluent in English or Spanish prior to stroke</label></li>
             </ul>
             
-            <h3>Exclusion – Check Any That Apply</h3>
+            <h3>Exclusion</h3>
             <ul id="exclusionList">
                 <li><input type="checkbox" id="dementia"><label for="dementia" title="Pre-existing dementia.">Pre-stroke dementia or failed dementia pre-screen</label></li>
                 <li><input type="checkbox" id="study"><label for="study" title="Conflicting studies.">Enrollment in a conflicting non-approved study</label></li>
