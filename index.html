@@ -2,147 +2,216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#001f3f">
     <title>DISCOVERY Study Recruitment</title>
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
             line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 10px;
+            background-color: #fff;
+            color: #333;
+            font-size: 16px;
+            max-width: 100%;
+            overflow-x: hidden;
         }
-        h1, h2 {
+        h1, h2, h3 {
+            color: #001f3f;
             text-align: center;
+            margin: 20px 0 10px;
+        }
+        h1 {
+            font-size: 24px;
+            padding: 15px 0;
+            background-color: #001f3f;
+            color: #fff;
+            margin: 0;
+        }
+        section {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
         }
         ul {
             list-style-type: none;
-            padding-left: 0;
+            padding: 0;
         }
         li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
         }
-        form {
-            margin-top: 20px;
-            border-top: 1px solid #ccc;
-            padding-top: 20px;
+        input[type="checkbox"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
         }
         label {
-            display: block;
-            margin-bottom: 5px;
+            flex: 1;
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
+        p {
+            margin: 10px 0;
+            font-size: 16px;
         }
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            padding: 12px;
+            background-color: #28a745;
             color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
         }
         #emailTemplate {
             margin-top: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             padding: 15px;
-            background-color: #f9f9f9;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            animation: fadeIn 0.5s ease-in-out;
         }
         textarea {
             width: 100%;
-            height: 150px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            height: 120px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            resize: none;
+            background-color: #fff;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .copy-btn {
+            background-color: #007bff;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Media queries for larger screens */
+        @media (min-width: 768px) {
+            body {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            section {
+                padding: 20px;
+            }
+        }
+        @media (min-width: 1024px) {
+            body {
+                max-width: 1000px;
+            }
         }
     </style>
 </head>
 <body>
     <h1>DISCOVERY Study Recruitment</h1>
     
-    <h2>Eligibility Criteria</h2>
-    
-    <h3>SCREEN (Inclusion) – all must be YES:</h3>
-    <ul>
-        <li>[ ] Age ≥18</li>
-        <li>[ ] Hospital admission with acute ischemic stroke (AIS), intracerebral hemorrhage (ICH), or aneurysmal subarachnoid hemorrhage (aSAH)</li>
-        <li>[ ] Radiographic confirmation of stroke type</li>
-        <li>[ ] Able to complete baseline visit within 6 weeks of onset</li>
-        <li>[ ] Able to provide informed consent (self or proxy)</li>
-        <li>[ ] Fluent in English or Spanish prior to stroke</li>
-    </ul>
-    
-    <h3>EXCLUDE if any are TRUE:</h3>
-    <ul>
-        <li>[ ] Pre-stroke dementia or failed dementia pre-screen</li>
-        <li>[ ] Enrollment in a conflicting non-approved study</li>
-        <li>[ ] Unable to complete protocol due to advanced directives or severe comorbidities</li>
-    </ul>
-    
-    <h2>Bedside Message for Eligible Patients</h2>
-    <p>“Please consider participating in the DISCOVERY study, which looks at how stroke affects thinking and memory over time. Taking part will not change or delay your medical care. If you join, you will see a stoke neurologist at Harborview Medical Center’s Stroke clinic within the next six weeks, and that visit will include brief thinking and memory tests along with a small blood draw—about 25 milliliters (around five teaspoons). Follow-up would occur again around 3–6 months and in 18 months, with a short phone call each year. Would you be open to hearing more or talking with our research coordinator?”</p>
-    
-    <h2>Refer a Patient</h2>
-    <p>For eligible patients who express interest, enter their details below and generate an email template.</p>
-    
-    <div id="referralForm">
-        <label for="name">Patient's Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter patient's name (optional)">
+    <section id="eligibility">
+        <h2>Eligibility Criteria</h2>
         
-        <label for="mrn">Medical Record Number:</label>
-        <input type="text" id="mrn" name="mrn" placeholder="Enter MRN (optional)">
+        <h3>Inclusion – Check All That Apply</h3>
+        <ul>
+            <li><input type="checkbox" id="age"><label for="age">Age ≥18</label></li>
+            <li><input type="checkbox" id="admission"><label for="admission">Hospital admission with acute ischemic stroke (AIS), intracerebral hemorrhage (ICH), or aneurysmal subarachnoid hemorrhage (aSAH)</label></li>
+            <li><input type="checkbox" id="radiographic"><label for="radiographic">Radiographic confirmation of stroke type</label></li>
+            <li><input type="checkbox" id="baseline"><label for="baseline">Able to complete baseline visit within 6 weeks of onset</label></li>
+            <li><input type="checkbox" id="consent"><label for="consent">Able to provide informed consent (self or proxy)</label></li>
+            <li><input type="checkbox" id="language"><label for="language">Fluent in English or Spanish prior to stroke</label></li>
+        </ul>
         
-        <button type="button" id="generateButton">Generate Email</button>
-    </div>
+        <h3>Exclusion – Check Any That Apply</h3>
+        <ul>
+            <li><input type="checkbox" id="dementia"><label for="dementia">Pre-stroke dementia or failed dementia pre-screen</label></li>
+            <li><input type="checkbox" id="study"><label for="study">Enrollment in a conflicting non-approved study</label></li>
+            <li><input type="checkbox" id="protocol"><label for="protocol">Unable to complete protocol due to advanced directives or severe comorbidities</label></li>
+        </ul>
+    </section>
     
-    <div id="emailTemplate" style="display:none;">
-        <h3>Generated Email Template</h3>
-        <p><strong>To:</strong> rkalani@uw.edu</p>
-        <p><strong>Subject:</strong> Potential DISCOVERY Participant</p>
-        <p><strong>Body:</strong></p>
-        <textarea id="emailBody" readonly></textarea>
-        <a id="sendEmail" href="#" style="display: block; margin: 10px 0; color: #007bff; text-decoration: none;">Click to open in your email app</a>
-        <button id="copyButton" type="button">Copy Body to Clipboard</button>
-    </div>
+    <section id="bedside">
+        <h2>Bedside Message</h2>
+        <p id="bedsideMessage">“Please consider participating in the DISCOVERY study, which looks at how stroke affects thinking and memory over time. Taking part will not change or delay your medical care. If you joined, you will see a neurologist at Harborview Medical Center stroke clinic. That visit will include brief thinking and memory tests along with a small blood draw—about 25 milliliters (around five teaspoons). Follow-up would occur again around 3–6 months and in 18 months, with a short phone call each year. Would you be open to hearing more or talking with our research coordinator?”</p>
+        <button id="copyBedside" class="copy-btn">Copy Message</button>
+    </section>
+    
+    <section id="refer">
+        <h2>Refer a Patient</h2>
+        <p>For eligible patients who express interest, generate an email template below. Copy and paste it into your secure UW email app, then add the patient's details (name and MRN) before sending.</p>
+        <button id="generateButton">Generate Email Template</button>
+        
+        <div id="emailTemplate" style="display:none;">
+            <h3>Email Template</h3>
+            <p><strong>To:</strong> rkalani@uw.edu</p>
+            <p><strong>Subject:</strong> Potential DISCOVERY Participant</p>
+            <p><strong>Body:</strong></p>
+            <textarea id="emailBody" readonly>* Patient's name: [ENTER NAME HERE]
+* Medical record number: [ENTER MRN HERE]</textarea>
+            <a id="sendEmail" href="mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=*%20Patient's%20name%3A%20%5BENTER%20NAME%20HERE%5D%0A*%20Medical%20record%20number%3A%20%5BENTER%20MRN%20HERE%5D" style="display: block; margin: 10px 0;">Open in Email App (Edit Details)</a>
+            <button id="copyButton" class="copy-btn">Copy Body</button>
+        </div>
+    </section>
     
     <script>
-        document.getElementById('generateButton').addEventListener('click', function() {
-            const name = document.getElementById('name').value.trim();
-            const mrn = document.getElementById('mrn').value.trim();
-            
-            if (!name && !mrn) {
-                alert('Please provide at least the patient\'s name or medical record number.');
-                return;
-            }
-            
-            let body = '';
-            if (name) body += `* Patient's name: ${name}\n`;
-            if (mrn) body += `* Medical record number: ${mrn}\n`;
-            
-            document.getElementById('emailBody').value = body;
-            
-            const mailto = `mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=${encodeURIComponent(body)}`;
-            document.getElementById('sendEmail').href = mailto;
-            
-            document.getElementById('emailTemplate').style.display = 'block';
-            
-            document.getElementById('emailTemplate').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        document.getElementById('copyButton').addEventListener('click', function() {
-            const text = document.getElementById('emailBody').value;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Body copied to clipboard!');
-            }).catch(err => {
-                alert('Failed to copy: ' + err);
+        // Persist checkbox states using localStorage
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            const saved = localStorage.getItem(checkbox.id);
+            if (saved === 'true') checkbox.checked = true;
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
             });
         });
+
+        // Copy bedside message
+        document.getElementById('copyBedside').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('bedsideMessage').textContent).then(() => {
+                alert('Message copied!');
+            }).catch(err => alert('Failed to copy: ' + err));
+        });
+
+        // Generate email template
+        document.getElementById('generateButton').addEventListener('click', () => {
+            const template = document.getElementById('emailTemplate');
+            template.style.display = 'block';
+            template.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Copy email body
+        document.getElementById('copyButton').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('emailBody').value).then(() => {
+                alert('Template copied! Paste and edit in your email app.');
+            }).catch(err => alert('Failed to copy: ' + err));
+        });
+
+        // Service Worker for PWA/offline
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(reg => {
+                    console.log('Service Worker registered');
+                }).catch(err => console.log('Service Worker registration failed: ' + err));
+            });
+        }
     </script>
 </body>
 </html>
