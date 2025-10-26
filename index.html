@@ -227,6 +227,30 @@
         body.dark #linksSection a:hover {
             background-color: #003d80;
         }
+        #emailTemplate a, #emailTemplate .copy-btn {
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        #emailTemplate a:hover, #emailTemplate .copy-btn:hover {
+            background-color: #0056b3;
+        }
+        body.dark #emailTemplate a, body.dark #emailTemplate .copy-btn {
+            background-color: #0056b3;
+        }
+        body.dark #emailTemplate a:hover, body.dark #emailTemplate .copy-btn:hover {
+            background-color: #003d80;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -311,7 +335,7 @@
                 <p><strong>Body:</strong></p>
                 <textarea id="emailBody" readonly>* Patient's name: 
 * Medical record number: </textarea>
-                <a id="sendEmail" href="mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=*%20Patient's%20name%3A%20%0A*%20Medical%20record%20number%3A%20" style="display: block; margin: 10px 0;">Open in Email App (Edit Details)</a>
+                <a id="sendEmail" href="mailto:rkalani@uw.edu?subject=Potential%20DISCOVERY%20Participant&body=*%20Patient's%20name%3A%20%0A*%20Medical%20record%20number%3A%20">Open in Email App (Edit Details)</a>
                 <button id="copyButton" class="copy-btn">Copy Body</button>
             </div>
         </section>
